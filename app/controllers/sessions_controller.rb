@@ -9,9 +9,7 @@ class SessionsController < ApplicationController
         httponly: true
       }
 
-      render json: {
-        success: true
-      }
+      render 'sessions/create'
     else
       render json: {
         success: false
@@ -24,12 +22,9 @@ class SessionsController < ApplicationController
     session = Session.find_by(token: token)
 
     if session
-      user = session.user
+      @user = session.user
 
-      render json: {
-        authenticated: true,
-        username: user.username
-      }
+      render 'sessions/authenticated'
     else
       render json: {
         authenticated: false

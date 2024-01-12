@@ -5,12 +5,7 @@ class TweetsController < ApplicationController
       @tweet = user.tweets.new(tweet_params)
 
       if @tweet.save
-        render json: {
-          tweet: {
-            username: user.username,
-            message: @tweet.message
-          }
-        }
+        render 'tweets/create'
       else
         render json: {
           success: false
@@ -34,7 +29,7 @@ class TweetsController < ApplicationController
   end
 
   def index
-    @tweets = Tweet.order(created_at: :desc)
+    @tweets = Tweet.all.order(created_at: :desc)
     render 'tweets/index'
   end
 
