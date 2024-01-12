@@ -38,6 +38,15 @@ class TweetsController < ApplicationController
     render 'tweets/index'
   end
 
+  def index_by_user
+    user = User.find_by(username: params[:username])
+
+    if user
+      @tweets = user.tweets
+      render 'tweets/index'
+    end
+  end
+
   private
 
   def tweet_params
