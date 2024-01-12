@@ -18,9 +18,11 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find_by(id: params[:id])
 
     if current_session and @tweet and @tweet.destroy
-      render json: {
-        success: true
-      }
+      if @tweet.user == @session.user
+        render json: {
+          success: true
+        }
+      end
     else
       render json: {
         success: false
