@@ -33,6 +33,11 @@ class TweetsController < ApplicationController
     end
   end
 
+  def index
+    @tweets = Tweet.order(created_at: :desc)
+    render 'tweets/index'
+  end
+
   private
 
   def tweet_params
